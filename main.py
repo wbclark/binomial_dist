@@ -8,7 +8,7 @@ P_one = 0.1852  # C'thun drop rate
 P_two = 0.2030  # Faerlina drop rate
 P_three = 0.1740 # Kel'thuzad drop rate
 
-def compute_probability(min_successes = 10, num_weeks = 12):
+def compute_probability(min_successes, num_weeks):
     total_probability = 0
     for K_one in range(min_successes):
         for K_two in range(min_successes-K_one):
@@ -17,15 +17,8 @@ def compute_probability(min_successes = 10, num_weeks = 12):
                 total_probability += current_probability
                 # print(f'{K_one} drops from C\'thun, {K_two} drops from Faerlina, and {K_three} drops from Kel\'thuzad has probability: {current_probability}')
                 # print(f'cumulative probability at this point in the calculation is {total_probability}')
-    print(f'The probability of having less than {min_successes} total drops of the three items in {num_weeks} weeks is {total_probability}.')
     print(f'The probability of having {min_successes} or more total drops of the three items in {num_weeks} weeks is {1-total_probability}.')
 
-
-compute_probability(min_successes = 5, num_weeks = 12)
-compute_probability(min_successes = 6, num_weeks = 12)
-compute_probability(min_successes = 8, num_weeks = 12)
-compute_probability(min_successes = 10, num_weeks = 12)
-compute_probability(min_successes = 5, num_weeks = 16)
-compute_probability(min_successes = 6, num_weeks = 16)
-compute_probability(min_successes = 8, num_weeks = 16)
-compute_probability(min_successes = 10, num_weeks = 16)
+for weeks in [12,14,16]:
+    for successes in [5,6,7,8,9,10]:
+        compute_probability(min_successes = successes, num_weeks = weeks)

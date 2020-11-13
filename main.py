@@ -8,21 +8,24 @@ P_one = 0.1852  # C'thun drop rate
 P_two = 0.2030  # Faerlina drop rate
 P_three = 0.1740 # Kel'thuzad drop rate
 
-# to compute the probability of 10 or more drops with 12 trials on each boss, we first compute the probability of 9 or less drops
-# we sum over products of PDFs with K_one + K_two + K_three < 10
+def compute_probability(min_successes = 10, num_weeks = 12):
+    total_probability = 0
+    for K_one in range(min_successes):
+        for K_two in range(min_successes-K_one):
+            for K_three in range(min_successes-K_two-K_one):
+                current_probability = binom_pdf(P_one, num_weeks, K_one)*binom_pdf(P_two, num_weeks, K_two)*binom_pdf(P_three, num_weeks, K_three)
+                total_probability += current_probability
+                # print(f'{K_one} drops from C\'thun, {K_two} drops from Faerlina, and {K_three} drops from Kel\'thuzad has probability: {current_probability}')
+                # print(f'cumulative probability at this point in the calculation is {total_probability}')
+    print(f'The probability of having less than {min_successes} total drops of the three items in {num_weeks} weeks is {total_probability}.')
+    print(f'The probability of having {min_successes} or more total drops of the three items in {num_weeks} weeks is {1-total_probability}.')
 
-total_probability = 0
-for K_one in range(10):
-    for K_two in range(10-K_one):
-        for K_three in range(10-K_two-K_one):
-            current_probability = binom_pdf(P_one, 12, K_one)*binom_pdf(P_two, 12, K_two)*binom_pdf(P_three, 12, K_three)
-            total_probability += current_probability
-            print(f'{K_one} drops from C\'thun, {K_two} drops from Faerlina, and {K_three} drops from Kel\'thuzad has probability: {current_probability}')
-            print(f'cumulative probability at this point in the calculation is {total_probability}')
 
-# total_probability is the probability of less than 10 drops on 12 kills each of the three bosses
-# 1 - total_probability then is the probability of 10 or more drops on 12 kills each of the three bosses
-
-print('Calculation done!')
-print(f'The probability of having less than 10 total drops of the three items in 12 weeks is {total_probability}.')
-print(f'The probability of having 10 or more total drops of the three items in 12 weeks is {1-total_probability}.')
+compute_probability(min_successes = 5, num_weeks = 12)
+compute_probability(min_successes = 6, num_weeks = 12)
+compute_probability(min_successes = 8, num_weeks = 12)
+compute_probability(min_successes = 10, num_weeks = 12)
+compute_probability(min_successes = 5, num_weeks = 16)
+compute_probability(min_successes = 6, num_weeks = 16)
+compute_probability(min_successes = 8, num_weeks = 16)
+compute_probability(min_successes = 10, num_weeks = 16)

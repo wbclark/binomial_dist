@@ -6,6 +6,32 @@ The strategy is to take the product of three binomial distribution probability d
 
 The result of the calculation is below. The results are generalized to show the probability of at least 5, 6, 7, 8, 9, or 10 total drops, over periods of 12, 14, or 16 weeks:
 
+UPDATE: Apparently the initial P values were probably off. Per someone who would know, P_one should be around 0.05, P_two around 0.20, and P_three around 0.10-0.12 (lower certainty here due to low sample size). The updated calculation is
+
+```
+(env) [wclark@mercury binomial_dist]$ python main.py
+The probability of having 5 or more total drops of the three items in 12 weeks is 0.4380531313103446.
+The probability of having 6 or more total drops of the three items in 12 weeks is 0.25629006661661835.
+The probability of having 7 or more total drops of the three items in 12 weeks is 0.12924679205335687.
+The probability of having 8 or more total drops of the three items in 12 weeks is 0.05634308203677996.
+The probability of having 9 or more total drops of the three items in 12 weeks is 0.021323740981913253.
+The probability of having 10 or more total drops of the three items in 12 weeks is 0.00703848091740511.
+The probability of having 5 or more total drops of the three items in 14 weeks is 0.5813774417526356.
+The probability of having 6 or more total drops of the three items in 14 weeks is 0.3910150935801887.
+The probability of having 7 or more total drops of the three items in 14 weeks is 0.23102950460315597.
+The probability of having 8 or more total drops of the three items in 14 weeks is 0.11986394452159643.
+The probability of having 9 or more total drops of the three items in 14 weeks is 0.05472790787214088.
+The probability of having 10 or more total drops of the three items in 14 weeks is 0.022063664037083486.
+The probability of having 5 or more total drops of the three items in 16 weeks is 0.7025044875004827.
+The probability of having 6 or more total drops of the three items in 16 weeks is 0.5253178582526653.
+The probability of having 7 or more total drops of the three items in 16 weeks is 0.35130993447197767.
+The probability of having 8 or more total drops of the three items in 16 weeks is 0.2093106579410423.
+The probability of having 9 or more total drops of the three items in 16 weeks is 0.11107841810440233.
+The probability of having 10 or more total drops of the three items in 16 weeks is 0.05259701566799979.
+```
+
+The calculation with the older P values is presented here to see the difference:
+
 ```
 (env) [wclark@mercury binomial_dist]$ python main.py
 The probability of having 5 or more total drops of the three items in 12 weeks is 0.8309578571755167.

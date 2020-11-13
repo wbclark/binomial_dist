@@ -4,9 +4,14 @@ import scipy.special
 def binom_pdf(p, n, k):
     return scipy.special.comb(n, k)*(p**k)*((1-p)**(n-k))
 
-P_one = 0.1852  # C'thun drop rate
-P_two = 0.2030  # Faerlina drop rate
-P_three = 0.1740 # Kel'thuzad drop rate
+# P_one = 0.1852  # C'thun drop rate
+# P_two = 0.2030  # Faerlina drop rate
+# P_three = 0.1740 # Kel'thuzad drop rate
+
+# Per Larry, these probabilities are probably more accurate. P_three is the most uncertain due to low sample size.
+P_one = 0.05
+P_two = 0.20
+P_three = 0.11
 
 def compute_probability(min_successes, num_weeks):
     total_probability = 0
